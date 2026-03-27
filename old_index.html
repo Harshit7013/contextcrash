@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContextCrash - AI Observability</title>
+    <meta name="description" content="AI observability and debugging tool for RAG-based systems in education.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="logo-icon">
+                    <path d="M4 10L13 2L12 10H20L11 22L12 14H4L4 10Z" fill="var(--accent-purple)"/>
+                </svg>
+                ContextCrash
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item active">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    Query Logs
+                </a>
+                <a href="#" class="nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    Failures
+                </a>
+                <a href="#" class="nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    Analytics
+                </a>
+                <a href="#" class="nav-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    Settings
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Workspace -->
+        <div class="workspace">
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="search-wrap">
+                    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" class="search-input" placeholder="Search queries...">
+                </div>
+                <div class="topbar-actions">
+                    <div class="filter-dropdown">
+                        <span>Failure Type</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="filter-dropdown">
+                        <span>Status: All</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="avatar">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=70a1ff&color=fff" alt="User Avatar">
+                    </div>
+                </div>
+            </header>
+
+            <!-- 3 Column Main Content -->
+            <main class="content-columns">
+                
+                <!-- Left Panel: Query List -->
+                <section class="panel query-list-panel">
+                    <h2 class="panel-title">Recent Queries</h2>
+                    <div class="query-list">
+                        <div class="query-item success">
+                            <div class="query-header">
+                                <span class="query-time">10:42 AM</span>
+                                <span class="badge badge-success">Success</span>
+                            </div>
+                            <p class="query-text">What is the last date to pay semester fee?</p>
+                        </div>
+                        <div class="query-item suspicious">
+                            <div class="query-header">
+                                <span class="query-time">10:40 AM</span>
+                                <span class="badge badge-warning">Suspicious</span>
+                            </div>
+                            <p class="query-text">When are end semester exams?</p>
+                        </div>
+                        <div class="query-item failed active">
+                            <div class="query-header">
+                                <span class="query-time">10:35 AM</span>
+                                <span class="badge badge-danger">Failed</span>
+                            </div>
+                            <p class="query-text">What is hostel refund policy?</p>
+                        </div>
+                        <div class="query-item success">
+                            <div class="query-header">
+                                <span class="query-time">10:15 AM</span>
+                                <span class="badge badge-success">Success</span>
+                            </div>
+                            <p class="query-text">How many credits required for graduation?</p>
+                        </div>
+                        <div class="query-item success">
+                            <div class="query-header">
+                                <span class="query-time">09:50 AM</span>
+                                <span class="badge badge-success">Success</span>
+                            </div>
+                            <p class="query-text">List all computer science electives.</p>
+                        </div>
+                        <div class="query-item failed">
+                            <div class="query-header">
+                                <span class="query-time">09:42 AM</span>
+                                <span class="badge badge-danger">Failed</span>
+                            </div>
+                            <p class="query-text">Professor Smith's email address?</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Center Panel: Query Details -->
+                <section class="panel query-details-panel">
+                    <div class="details-card">
+                        <div class="details-header">
+                            <span class="label">User Question</span>
+                            <span class="time-stamp">ID: qRY-892x • 10:35 AM</span>
+                        </div>
+                        <h3 class="user-question">What is hostel refund policy?</h3>
+                        
+                        <div class="section-divider"></div>
+
+                        <div class="chunks-section">
+                            <div class="section-title-wrap">
+                                <span class="label">Retrieved Chunks</span>
+                            </div>
+                            <div class="chunk-card">
+                                <div class="chunk-header">
+                                    <span class="chunk-name">Student_Handbook_2023.pdf</span>
+                                    <span class="similarity-score good">0.82 similarity</span>
+                                </div>
+                                <p class="chunk-content">...the hostel fees must be paid in full at the beginning of the semester. Refunds are only applicable if a student withdraws within the first 14 days of classes. No refunds...</p>
+                            </div>
+                            <div class="chunk-card">
+                                <div class="chunk-header">
+                                    <span class="chunk-name">Housing_FAQ_v2.docx</span>
+                                    <span class="similarity-score weak">0.45 similarity</span>
+                                </div>
+                                <p class="chunk-content">...for room changes, please contact the housing office. Meal plan refunds are processed separately from room fees. See the finance portal for meal plan adjustments...</p>
+                            </div>
+                        </div>
+
+                        <div class="section-divider"></div>
+
+                        <div class="prompt-section">
+                            <details>
+                                <summary class="collapsible-header">
+                                    <span class="label">Prompt Sent to LLM</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </summary>
+                                <div class="code-block">
+                                    <code>
+System: You are an academic advisor AI. Use the provided context to answer the user's question accurately. If you don't know, say so.
+Context:
+1. ...the hostel fees must be paid in full at the beginning of the semester. Refunds are only applicable if a student withdraws within the first 14 days of classes. No refunds...
+2. ...for room changes, please contact the housing office. Meal plan refunds are processed separately from room fees. See the finance portal for meal plan adjustments...
+
+User: What is hostel refund policy?
+                                    </code>
+                                </div>
+                            </details>
+                        </div>
+
+                        <div class="section-divider"></div>
+
+                        <div class="final-answer-section">
+                            <span class="label">Final Answer Generated</span>
+                            <div class="answer-box">
+                                <p>Hostel refunds are fully processed anytime during the semester. If you need a refund, you should also contact the housing office to adjust your meal plan immediately.</p>
+                                <div class="hallucination-highlight">
+                                    Note: "fully processed anytime during the semester" contradicts source context requiring withdrawal within first 14 days.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Right Panel: Diagnosis -->
+                <section class="panel diagnosis-panel">
+                    <div class="diagnosis-header">
+                        <h2>Failure Diagnosis</h2>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    </div>
+
+                    <div class="diagnosis-content">
+                        <div class="diag-row">
+                            <span class="diag-label">Failure Type</span>
+                            <span class="diag-value type-hallucination">Hallucination / Contradiction</span>
+                        </div>
+                        <div class="diag-row">
+                            <span class="diag-label">Confidence Score</span>
+                            <span class="diag-value score">0.87 <span class="muted">(High Risk)</span></span>
+                        </div>
+                        
+                        <div class="cause-box">
+                            <h4>Root Cause</h4>
+                            <p>The LLM ignored the explicit "14-day" constraint in chunk 1 and fabricated a lenient policy ("anytime"). Additionally, it confused meal plan rules with hostel rules from chunk 2.</p>
+                        </div>
+
+                        <div class="suggested-fix">
+                            <h4>Suggested Fix</h4>
+                            <ul class="fix-steps">
+                                <li><strong>Adjust Prompt:</strong> Add strict adherence instruction: "Do not synthesize external rules. Only state facts present in context."</li>
+                                <li><strong>Filter Chunks:</strong> Drop chunks with similarity < 0.50 (Chunk 2 added irrelevant noise).</li>
+                            </ul>
+                        </div>
+
+                        <button class="rerun-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6"></path><path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path><path d="M3 22v-6h6"></path><path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path></svg>
+                            Re-run After Fix
+                        </button>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- Bottom Section: Analytics -->
+            <footer class="analytics-section">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-title">Total Queries (24h)</span>
+                        <div class="metric-value">12,450 <span class="trend up">+5.2%</span></div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-title">Failure Rate</span>
+                        <div class="metric-value text-red">8.4% <span class="trend down-bad">+1.1%</span></div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-title">Avg Response Time</span>
+                        <div class="metric-value">1.2s <span class="trend neutral">0.0%</span></div>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-box">
+                        <h4 class="chart-title">Failure Distribution</h4>
+                        <!-- CSS Pie Chart representation for visual sake -->
+                        <div class="pie-chart-wrap">
+                            <div class="pie-chart"></div>
+                            <div class="legend">
+                                <div class="leg-item"><div class="dot d-red"></div> Hallucination (55%)</div>
+                                <div class="leg-item"><div class="dot d-yellow"></div> Wrong Retrieval (30%)</div>
+                                <div class="leg-item"><div class="dot d-purple"></div> Context Conf. (15%)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-box">
+                        <h4 class="chart-title">Most Common Errors</h4>
+                        <div class="bar-chart-wrap">
+                            <div class="bar-row"><span class="bar-lbl">Hallucination</span> <div class="bar rbg" style="width: 80%"></div><span class="val">574</span></div>
+                            <div class="bar-row"><span class="bar-lbl">Low Retrieve</span> <div class="bar ybg" style="width: 45%"></div><span class="val">312</span></div>
+                            <div class="bar-row"><span class="bar-lbl">Timeout</span> <div class="bar pbg" style="width: 20%"></div><span class="val">140</span></div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
